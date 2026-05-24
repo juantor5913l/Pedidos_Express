@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="contenedor">
+
+    <div class="form-card">
+
+        <h1>Consultar pedido</h1>
+
+        <form method="POST">
+
+            <input type="number" name="pedido_id" placeholder="Número de pedido" required>
+
+            <button type="submit" class="btn-confirmar">
+                Ver estado
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

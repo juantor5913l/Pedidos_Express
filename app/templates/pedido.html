@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="contenedor">
+
+    <div class="form-card">
+
+        <h1>Confirmar pedido</h1>
+
+        <form method="POST">
+
+            <input type="text" name="nombre" placeholder="Tu nombre" required>
+            <input type="text" name="telefono" placeholder="Tu teléfono" required>
+            <input type="text" name="direccion" placeholder="Tu dirección" required>
+
+            <div class="total-box">
+                <h2>Total: ${{ total }}</h2>
+            </div>
+
+            <button type="submit" class="btn-confirmar">
+                Confirmar pedido
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

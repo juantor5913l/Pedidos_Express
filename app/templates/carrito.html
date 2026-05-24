@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="contenedor">
+
+    <h1>Tu pedido</h1>
+
+    {% for item in productos %}
+    <div class="card carrito-card">
+
+        <img src="{{ url_for('static', filename='img/' + item.producto.imagen) }}" alt="">
+
+        <div class="info">
+            <h3>{{ item.producto.nombre }}</h3>
+            <p>Cantidad: {{ item.cantidad }}</p>
+            <p>Subtotal: ${{ item.subtotal }}</p>
+
+            <div class="controles">
+                <a href="{{ url_for('main.restar', producto_id=item.producto.id) }}">
+                    <button class="btn-cantidad">−</button>
+                </a>
+
+                <a href="{{ url_for('main.sumar', producto_id=item.producto.id) }}">
+                    <button class="btn-cantidad">+</button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+
+    <div class="resumen">
+        <h2>Total: ${{ total }}</h2>
+
+        <a href="{{ url_for('main.confirmar') }}">
+            <button class="btn-finalizar">Continuar</button>
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

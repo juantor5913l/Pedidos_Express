@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="contenedor">
+
+    <h1 style="margin-bottom:25px;">Panel de pedidos</h1>
+
+    {% for item in pedidos_con_detalles %}
+    <div class="admin-card">
+
+        <div class="admin-top">
+            <h2>Pedido #{{ item.pedido.id }}</h2>
+            <span class="estado-badge">{{ item.pedido.estado }}</span>
+        </div>
+
+        <p><strong>Cliente:</strong> {{ item.pedido.cliente }}</p>
+        <p><strong>Teléfono:</strong> {{ item.pedido.telefono }}</p>
+        <p><strong>Mesa:</strong> {{ item.pedido.mesa }}</p>
+        <p><strong>Total:</strong> ${{ item.pedido.total }}</p>
+
+        <div class="productos-admin">
+            <h4>Productos:</h4>
+
+            {% for detalle in item.detalles %}
+            <div class="producto-linea">
+                {{ detalle.producto.nombre }} x {{ detalle.cantidad }}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="acciones">
+
+            <a href="{{ url_for('main.cambiar_estado', pedido_id=item.pedido.id, estado='Recibido') }}">
+                <button>Recibido</button>
+            </a>
+
+            <a href="{{ url_for('main.cambiar_estado', pedido_id=item.pedido.id, estado='Preparando') }}">
+                <button>Preparando</button>
+            </a>
+
+            <a href="{{ url_for('main.cambiar_estado', pedido_id=item.pedido.id, estado='En camino') }}">
+                <button>En camino</button>
+            </a>
+
+            <a href="{{ url_for('main.cambiar_estado', pedido_id=item.pedido.id, estado='Entregado') }}">
+                <button>Entregado</button>
+            </a>
+
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

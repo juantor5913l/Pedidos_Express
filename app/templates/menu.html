@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="contenedor">
+
+    <div class="header">
+    <h1>Pedidos Express</h1>
+
+    <div style="display:flex; gap:10px;">
+
+        <a class="carrito-btn" href="{{ url_for('main.carrito') }}">
+            🛒 Carrito ({{ total_items }})
+        </a>
+
+        <a class="carrito-btn" href="{{ url_for('main.buscar_pedido') }}">
+            📦 Pedido
+        </a>
+
+    </div>
+</div>
+    <div class="busqueda">
+        <input type="text" id="buscar" placeholder="Buscar producto..." onkeyup="filtrarProductos()">
+    </div>
+
+    <div class="productos">
+
+        {% for producto in productos %}
+        <div class="card producto-card">
+
+            <img src="{{ url_for('static', filename='img/' + producto.imagen) }}" alt="">
+
+            <div class="info">
+                <h3>{{ producto.nombre }}</h3>
+                <p>${{ producto.precio }}</p>
+
+                <a href="{{ url_for('main.agregar', producto_id=producto.id) }}">
+                    <button>Agregar</button>
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<script>
+function filtrarProductos() {
+    let input = document.getElementById("buscar").value.toLowerCase();
+    let cards = document.querySelectorAll(".producto-card");
+
+    cards.forEach(card => {
+        let nombre = card.querySelector("h3").textContent.toLowerCase();
+
+        if (nombre.includes(input)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+</script>
+
+{% endblock %}
