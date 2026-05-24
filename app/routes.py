@@ -130,12 +130,12 @@ def confirmar():
     if request.method == "POST":
         nombre = request.form["nombre"]
         telefono = request.form["telefono"]
-        direccion = request.form["direccion"]
+        mesa = request.form["mesa"]
 
         pedido = Pedido(
             cliente=nombre,
             telefono=telefono,
-            direccion=direccion,
+            mesa=mesa,
             total=total
         )
 
